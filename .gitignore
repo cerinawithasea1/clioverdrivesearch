@@ -1,0 +1,41 @@
+# Node.js
+node_modules/
+npm-debug.log
+*.log
+.env
+
+# Project files
+libraries.json
+
+# Directories
+search-results/
+dist/
+coverage/
+.vscode/
+.idea/
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Local files
+*.local
+*.local.*
+config.local.js
+preferences.local.json
+
+# npm package files
+package-lock.json
+npm-shrinkwrap.json
+
+# Debug files
+debug/
+*.debug
+*.debug.*
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+*.swp
+*.swo

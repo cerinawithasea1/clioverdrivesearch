@@ -1,0 +1,21 @@
+{
+  "name": "library-finder",
+  "version": "1.0.0",
+  "description": "A command-line tool to search multiple libraries for audiobooks with Goodreads ratings integration.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "node-fetch": "^2.7.0",
+    "rate-limiter-flexible": "^7.1.0"
+  }
+}

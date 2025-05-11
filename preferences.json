@@ -1,0 +1,27 @@
+{
+    "favoriteLibraries": [
+        "Alhambra",
+        "Boston Public Library",
+        "Chicago",
+        "DC"
+    ],
+    "searchPreferences": {
+        "preferredFormats": [
+            "audiobook-overdrive",
+            "ebook-overdrive"
+        ],
+        "maxWaitDays": 30,
+        "hideUnavailable": false,
+        "sortPreference": "availability"
+    },
+    "libraryNicknames": {
+        "Boston Public Library": "BPL",
+        "Chicago": "CPL",
+        "District of Columbia": "DC"
+    },
+    "exportDefaults": {
+        "format": "json",
+        "directory": "./search-results",
+        "includeTimestamp": true
+    }
+}
