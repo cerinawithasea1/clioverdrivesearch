@@ -1,12 +1,36 @@
-# Library Book Finder
+# Library Book Finder 🚀
 
-This tool helps you search for books across multiple libraries using Overdrive's system. It shows availability, wait times, and direct links to each book. Features include colorized output, rate limiting protection, library preferences, and the ability to export search results.
+A supercharged command-line tool to search multiple libraries simultaneously for books and audiobooks using OverDrive's system. Get real-time availability, waitlist times, and direct links across thousands of libraries worldwide!
+
+## ✨ SUPERCHARGED Features
+
+🆕 **NEW: Dynamic Library Discovery** - No more manual configuration!
+- 🌍 **Access to ALL OverDrive libraries worldwide** (11,000+ libraries!)
+- ⚡ **Smart caching system** for blazing-fast startup
+- 🔄 **Auto-refresh** library index with `--refresh-libs`
+- 🎯 **Library limiting** with `--max-libs` for testing
+
+🎨 **Enhanced Search Experience**:
+- Green for available books
+- Yellow for waitlist information  
+- Blue for clickable URLs
+- Red for errors
+
+🚦 **Built-in Protection**:
+- Rate limiting to prevent API throttling
+- Intelligent error handling
+- Safe delays to avoid account flagging
+
+⭐ **Smart Features**:
+- Favorite libraries appear first in results
+- Export results as JSON or CSV
+- Template-based configuration for privacy
 
 ## Installation
 
-1. Unzip the library-finder.zip file
+1. Clone this repository
 2. Install Node.js if you haven't already (download from https://nodejs.org/)
-3. Open your terminal and navigate to the unzipped directory:
+3. Navigate to the project directory:
    ```bash
    cd library-finder
    ```
@@ -30,7 +54,7 @@ This tool helps you search for books across multiple libraries using Overdrive's
        cd PATH_TO_LIBRARY_FINDER && node library-search.js "audiobook" "$@"
    }
    ```
-   Replace PATH_TO_LIBRARY_FINDER with the actual path where you unzipped the files.
+   Replace PATH_TO_LIBRARY_FINDER with the actual path to this directory.
    
 6. Reload your shell:
    ```bash
@@ -56,9 +80,9 @@ Search for audiobooks only:
 libsearch-audio "Book Title"
 ```
 
-### New Dynamic Library Features
+### 🆕 Dynamic Library Features
 
-🆕 **Automatic OverDrive Library Discovery**: No more manual library configuration!
+**Automatic OverDrive Library Discovery** - No more manual library configuration!
 
 Refresh the OverDrive libraries index:
 ```bash
@@ -83,64 +107,131 @@ The results will show:
 
 ## Files Included
 - library-search.js: Main search script
-- libraries.template.json: Template for library configuration
+- libraries.template.json: Template for library configuration  
 - preferences.json: User preferences and favorite libraries
 - README.md: This instruction file
 - package.json: Node.js dependencies
 
 ## Features
 
-### Colorized Output
-- Green for available books
-- Yellow for waitlist information
-- Blue for clickable URLs
-- Red for errors
+- 🎨 **Colorized output** for easy reading
+- 🔍 **Search by format** (ebook, audiobook, or both)
+- ⏱️ **Show available copies and wait times**
+- 📊 **Export results** as JSON or CSV
+- 🚦 **Rate limiting protection**
+- ⭐ **Support for favorite libraries** (show results first)
+- 🔐 **Template-based configuration** for privacy
+- 🌍 **Dynamic OverDrive library discovery** (NEW!)
 
-### Library Preferences
-Edit `preferences.json` to:
-- Set favorite libraries (shown first in results)
-- Configure library nicknames
-- Set default search preferences
-- Customize export settings
+## Setup Process
 
-### Export Results
-Export your search results to JSON or CSV:
+The script will create template configuration files on first run. Follow these steps:
+
+### 1. Initial Configuration
+Run any search command to generate the template files:
 ```bash
-# Export as JSON
-node library-search.js "Book Title" --export json
-
-# Export as CSV (compatible with Excel/Google Sheets)
-node library-search.js "Book Title" --export csv
+node library-search.js "test"
 ```
 
-Results are saved in the `search-results` directory with timestamps.
+### 2. Set Up Your Preferences
+Edit `preferences.json` to configure favorite libraries:
+```json
+{
+  "favoriteLibraryIds": ["1234", "5678"]
+}
+```
 
-### Dynamic Library Management
+### 3. Library Discovery
 
-🆕 **NEW**: Automatic OverDrive library discovery!
+🆕 **Automatic Discovery (Recommended)**: The script now automatically discovers all OverDrive libraries worldwide! No manual setup required.
 
-- **First run**: Automatically fetches and caches ALL OverDrive libraries
-- **Cached searches**: Uses local cache for fast startup
-- **Manual refresh**: `--refresh-libs` updates the library list
-- **Library limiting**: `--max-libs N` searches only first N libraries (useful for testing)
+**Manual Configuration (Optional)**: Edit `libraries.json` if you want to use only specific libraries:
+```json
+[
+  {
+    "name": "Your Local Library",
+    "id": "1234",
+    "websiteId": "your-library-overdrive-id",
+    "url": "https://your-library.overdrive.com",
+    "accountRequired": false
+  }
+]
+```
 
-**Cache file**: `libraries.api.cache.json` (automatically created)
+### 4. Available Command-Line Options
 
-**Benefits**:
-- 🚀 No manual library configuration needed
-- 🌍 Access to ALL OverDrive libraries worldwide  
-- ⚡ Fast searches with intelligent caching
-- 🔄 Easy updates when new libraries are added
+```
+node library-search.js [format] "query" [options]
 
-## Setup
-1. Create your libraries.json:
-   ```bash
-   cp libraries.template.json libraries.json
-   ```
-2. Edit libraries.json to include your preferred libraries
-3. Customize preferences.json to set your favorite libraries and export preferences
+format: "book", "audiobook", or omit for both
+query: Search terms in quotes
 
-## Notes
-- Your libraries.json will not be tracked in git to protect your library list
-- Rate limiting is enabled to prevent API throttling
-- Export results can be opened in spreadsheet applications for further analysis
+Options:
+--export json     Export results as JSON file
+--export csv      Export results as CSV file
+--refresh-libs    Refresh the OverDrive libraries cache
+--max-libs N      Limit search to first N libraries (for testing)
+```
+
+## Examples
+
+```bash
+# Basic search
+node library-search.js "The Great Gatsby"
+
+# Ebook only
+node library-search.js "book" "1984"
+
+# Audiobook only  
+node library-search.js "audiobook" "Dune"
+
+# Export to JSON
+node library-search.js "Pride and Prejudice" --export json
+
+# Refresh libraries and limit search
+node library-search.js --refresh-libs --max-libs 50 "Atomic Habits"
+```
+
+## Understanding the Output
+
+The script will show:
+- 🟢 **Available**: Ready to borrow immediately
+- 🟡 **On Hold**: Shows position in waitlist and estimated wait time
+- 🔴 **Not Available**: Not in this library's collection
+- 🔵 **Links**: Direct URLs to library catalog pages
+
+## Files Created
+
+- `preferences.json`: Your favorite library settings
+- `libraries.json`: Library information (auto-populated or manual)
+- `overdrive_libraries_cache.json`: Cached OverDrive library data
+- `results/`: Export folder for JSON/CSV files
+
+## Privacy & Security
+
+- No account credentials stored
+- Template files exclude sensitive information from git
+- Rate limiting protects against API abuse
+- All searches are anonymous unless you choose to log in to specific libraries
+
+## Troubleshooting
+
+**"No results found"**: Try different search terms or check if the book exists in digital format
+
+**Rate limiting errors**: The script includes built-in delays, but if you see errors, wait a few minutes
+
+**Library not showing results**: Some libraries require accounts - check the library's OverDrive site directly
+
+**Template files not created**: Make sure you have write permissions in the script directory
+
+## Technical Details
+
+Built with Node.js and uses:
+- OverDrive's public search APIs
+- Rate limiting for responsible API usage  
+- Colorized terminal output with chalk
+- Robust error handling and retries
+
+---
+
+*Happy reading! 📚*
