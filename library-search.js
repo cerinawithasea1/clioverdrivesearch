@@ -7,10 +7,10 @@ const chalk = require('chalk');
 // Cache file for dynamic library list
 const LIB_CACHE = path.join(__dirname, 'libraries.api.cache.json');
 
-// Create a rate limiter - 2 requests per second
+// Create a rate limiter - 1 request per 2 seconds to be safe
 const rateLimiter = new RateLimiterMemory({
-    points: 2,
-    duration: 1
+    points: 1,
+    duration: 2
 });
 
 async function fetchAllLibrariesFromAPI({ refresh = false } = {}) {
@@ -31,7 +31,14 @@ async function fetchAllLibrariesFromAPI({ refresh = false } = {}) {
     const baseUrl = `https://thunder.api.overdrive.com/v2/libraries`;
     
     while (true) {
-        await rateLimiter.consume(1);
+        try {
+            await rateLimiter.consume(1);
+        } catch (rateLimitError) {
+            // Wait for rate limit to reset
+            await new Promise(resolve => setTimeout(resolve, rateLimitError.msBeforeNext));
+            continue;
+        }
+        
         const url = currentPage === 1 ? baseUrl : `${baseUrl}?page=${currentPage}`;
         
         try {
@@ -58,17 +65,17 @@ async function fetchAllLibrariesFromAPI({ refresh = false } = {}) {
             allItems.push(...items);
             console.log(chalk.gray(`Fetched page ${currentPage}: ${items.length} libraries (${allItems.length} total)`));
             
-            // Check if there's a next page (limit to 3 pages for testing)
-            if (data.links && data.links.next && currentPage < 3) {
+            // Check if there's a next page (limit to 10 pages to get more libraries)
+            if (data.links && data.links.next && currentPage < 10) {
                 currentPage = data.links.next.page;
             } else {
                 break; // No more pages or reached test limit
             }
             
         } catch (error) {
-            console.error(chalk.red(`Error fetching libraries: ${error.message}`));
+            console.error(chalk.red(`Error fetching libraries page ${currentPage}: ${error.message || error}`));
             console.error('Full error:', error);
-            break;
+            break; // Stop fetching on error
         }
     }
 
@@ -231,12 +238,13 @@ async function searchLibraries(searchTitle, searchAuthor = "", { maxLibs = null,
                 // Retry this library
                 console.log(chalk.yellow(`Rate limited on ${library}, retrying...`));
                 return searchLibraries(searchTitle, searchAuthor);
-            } else if (error.name === 'RateLimiterRes') {
-                // Wait the required time then retry
+            } else if (error.msBeforeNext) {
+                // Rate limiter error - wait and continue to next library
+                console.log(chalk.yellow(`Rate limited on ${library}, waiting ${Math.ceil(error.msBeforeNext/1000)}s...`));
                 await new Promise(resolve => setTimeout(resolve, error.msBeforeNext));
-                return searchLibraries(searchTitle, searchAuthor);
+                continue; // Continue to next library instead of retrying all
             }
-            console.error(chalk.red(`Error searching ${library}: ${error.message}`));
+            console.error(chalk.red(`Error searching ${library}: ${error.message || 'Network error'}`));
         }
     }
     
@@ -291,7 +299,8 @@ if (require.main === module) {
                     process.exit(0);
                 }
             } catch (error) {
-                console.error(chalk.red('❌ Error refreshing libraries:'), error.message);
+                console.error(chalk.red('❌ Error refreshing libraries:'), error.message || error);
+                console.error('Full error details:', error);
                 process.exit(1);
             }
         }

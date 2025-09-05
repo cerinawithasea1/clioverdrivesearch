@@ -106,5 +106,1073 @@
     "name": "Microsoft Library",
     "isConsortium": false,
     "status": "Live"
+  },
+  {
+    "slug": "maryland",
+    "name": "Maryland's Digital Library",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "nypl",
+    "name": "New York Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "mlc",
+    "name": "Midwest Collaborative for Library Services",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "slco",
+    "name": "Salt Lake County Library Services",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "omaha",
+    "name": "Omaha Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "hawaii",
+    "name": "Hawaii State Public Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "toledo",
+    "name": "Toledo Lucas County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "queenslibrary",
+    "name": "Queens Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "cincinnatilibrary",
+    "name": "Cincinnati & Hamilton County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "ncdl",
+    "name": "Northern California Digital Library",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "gwinnett",
+    "name": "Gwinnett County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "sno-isle",
+    "name": "Sno-Isle Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "somerset",
+    "name": "Somerset County Library System of New Jersey",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "spl",
+    "name": "Seattle Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "darien",
+    "name": "Darien Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "camellia",
+    "name": "Camellia Net Digital Catalog",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "sails",
+    "name": "SAILS Library Network",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "dpls",
+    "name": "Deschutes Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "sjrlc",
+    "name": "South Jersey Regional Library Cooperative",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "elibrarynj",
+    "name": "eLibrary NJ",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "freelibrary",
+    "name": "The Free Library of Philadelphia",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "lcpl",
+    "name": "Loudoun County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "pima",
+    "name": "Pima County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "dlil",
+    "name": "Digital Library of Illinois",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "springfield",
+    "name": "Springfield-Greene County Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "rochester",
+    "name": "Rochester Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "act",
+    "name": "Libraries ACT",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "brooklyn",
+    "name": "Brooklyn Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "tblc",
+    "name": "Tampa Bay Library Consortium",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "pasadena",
+    "name": "Pasadena Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "clamsnet",
+    "name": "CLAMS",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "lapl",
+    "name": "Los Angeles Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "cwmars",
+    "name": "CW MARS",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "ppld",
+    "name": "Pikes Peak Library District",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "rcls",
+    "name": "Ramapo Catskill Library System",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "naperville",
+    "name": "Naperville Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "bpl",
+    "name": "Boston Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "acla",
+    "name": "Carnegie Library of Pittsburgh",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "reads",
+    "name": "Tennessee READS",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "mdpls",
+    "name": "Miami-Dade Public Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "ncdigital",
+    "name": "North Carolina Digital Library",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "ocln",
+    "name": "Old Colony Library Network",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "cabq",
+    "name": "Public Library Albuquerque and Bernalillo County",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "uhls",
+    "name": "Upper Hudson Library System",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "nlb",
+    "name": "NLB",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "spartanburglibraries",
+    "name": "Spartanburg County Public Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "nmls",
+    "name": "Nicholson Memorial Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "library2go",
+    "name": "Oregon Digital Library Consortium",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "hpl",
+    "name": "Hamilton Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "riezone",
+    "name": "Ocean State Libraries eZone",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "frontrange",
+    "name": "Front Range Downloadable Library",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "ocpl",
+    "name": "OC Public Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "libraryconnection",
+    "name": "Library Connection, Inc.",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "emedialibrary",
+    "name": "eMediaLibrary",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "memphis",
+    "name": "Memphis Public Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "slcl",
+    "name": "St. Louis County Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "onlib",
+    "name": "Onondaga County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "realtor",
+    "name": "National Association of REALTORS®",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "highplains",
+    "name": "High Plains Library District",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "chipublib",
+    "name": "Chicago Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "montcolibs",
+    "name": "Montgomery County Library District Consortium",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "akronlibrary",
+    "name": "Akron-Summit County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "vaughanpl",
+    "name": "Vaughan Public Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "scdl",
+    "name": "Southern California Digital Library",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "saclibrary",
+    "name": "Sacramento Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "ottawa",
+    "name": "Ottawa Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "broward",
+    "name": "Broward County Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "mvlc",
+    "name": "Merrimack Valley Library Consortium",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "indypl",
+    "name": "Indianapolis Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "nh",
+    "name": "New Hampshire State Library",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "downloadlibrary",
+    "name": "downloadLibrary",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "hcpl",
+    "name": "Harris County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "lacountylibrary",
+    "name": "LA County Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "plcmc",
+    "name": "Charlotte Mecklenburg Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "lsw",
+    "name": "Libraries Southwest Consortium",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "rml",
+    "name": "Rancho Mirage Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "pgcmls",
+    "name": "Prince George's County Memorial Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "jclc",
+    "name": "Jefferson County Library Cooperative",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "timberland",
+    "name": "Timberland Regional Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "calgary",
+    "name": "Calgary Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "infoway",
+    "name": "Farmington Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "greenwich",
+    "name": "Greenwich Library",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "lcls",
+    "name": "Lee County Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "marmot",
+    "name": "Marmot Library Network",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "first",
+    "name": "First Regional Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "kyunbound",
+    "name": "Kentucky Libraries Unbound",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "arlington",
+    "name": "Arlington Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "tulsa",
+    "name": "Tulsa City-County Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "jpl",
+    "name": "Jacksonville Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "collier",
+    "name": "Collier County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "epl",
+    "name": "Edmonton Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "moretonbay",
+    "name": "Moreton Bay Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "myrl",
+    "name": "Richland Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "yln",
+    "name": "Yavapai Library Network",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "mydlib",
+    "name": "My Digital Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "adl",
+    "name": "Alaska Digital Library",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "forsyth",
+    "name": "Forsyth County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "bcpl",
+    "name": "British Columbia Libraries",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "essexca",
+    "name": "Essex County Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "jefferson",
+    "name": "Jefferson County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "dclibrary",
+    "name": "District of Columbia Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "alexandria",
+    "name": "Alexandria Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "metrolibrary",
+    "name": "Metropolitan Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "washoecounty",
+    "name": "Washoe County Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "buffalo",
+    "name": "Buffalo & Erie County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "listeneasternwv",
+    "name": "Listen Eastern West Virginia",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "dayton",
+    "name": "Dayton Metro Library",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "ecoop",
+    "name": "E-Library Co-Op of Southeast Louisiana",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "carmel",
+    "name": "Carmel Clay Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "erielibrary",
+    "name": "Erie County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "brantford",
+    "name": "Brantford Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "abilene",
+    "name": "Abilene PL & Tom Green CL",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "bibliomation",
+    "name": "Bibliomation, Inc.",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "ncwlibraries",
+    "name": "NCW Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "krl",
+    "name": "Kitsap Regional Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "piercecounty",
+    "name": "Pierce County Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "lincoln",
+    "name": "Lincoln City Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "scld",
+    "name": "Spokane County Library District",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "livebrary",
+    "name": "Livebrary.com",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "lpl",
+    "name": "London Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "ccls",
+    "name": "Chautauqua-Cattaraugus Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "midyork",
+    "name": "Mid-York Library System",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "chester",
+    "name": "Chester County Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "palmetto",
+    "name": "Palmetto Library Consortium",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "fortbend",
+    "name": "Fort Bend County Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "westchester",
+    "name": "Westchester Library System",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "hendersonlibraries",
+    "name": "Henderson Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "elm",
+    "name": "eLibraries Manitoba",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "libraryweb",
+    "name": "Monroe County Library System",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "delco",
+    "name": "Delaware County Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "mcls",
+    "name": "Madison County Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "fwpl",
+    "name": "Fort Worth Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "sanantonio",
+    "name": "San Antonio Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "neworleans",
+    "name": "New Orleans Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "dcl",
+    "name": "Douglas County Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "pplc",
+    "name": "Pinellas Public Library Cooperative",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "arrowhead",
+    "name": "Arrowhead Library System",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "sonoma",
+    "name": "Sonoma County Library",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "princewilliam",
+    "name": "Prince William Public Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "santaclara",
+    "name": "Santa Clara County Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "nashville",
+    "name": "Nashville Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "blackgold",
+    "name": "Black Gold Cooperative Library System",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "wcl",
+    "name": "Wellington City Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "lion",
+    "name": "LION: Libraries Online",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "hadc",
+    "name": "Houston Area Digital Media Catalog",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "toronto",
+    "name": "Toronto Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "ebr",
+    "name": "East Baton Rouge Parish Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "jeff",
+    "name": "Jefferson Parish Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "boise",
+    "name": "Boise Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "brdc",
+    "name": "Blue Ridge Download Consortium",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "icpl",
+    "name": "Digital Johnson County",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "brisbane",
+    "name": "Brisbane City Council Library Services",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "arapahoe",
+    "name": "Arapahoe Library District",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "aclib",
+    "name": "Alachua County Library District",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "nassau",
+    "name": "Nassau Digital Doorway",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "flls",
+    "name": "Finger Lakes Library System",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "auckland",
+    "name": "Auckland Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "everett",
+    "name": "Everett Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "ebranch2go",
+    "name": "eBranch2Go",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "stcharles",
+    "name": "St. Charles City-County Library District",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "cobbcounty",
+    "name": "Cobb County Public Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "halifax",
+    "name": "Halifax Public Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "arlingtontx",
+    "name": "Arlington Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "owwl",
+    "name": "OWWL Library System",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "logan",
+    "name": "Logan Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "nebraska",
+    "name": "Nebraska OverDrive Libraries",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "lex",
+    "name": "Lexington County Public Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "dubuque",
+    "name": "Carnegie-Stout Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "nioga",
+    "name": "Nioga Library System",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "yuma",
+    "name": "Yuma County Library District",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "irvinglibrary",
+    "name": "Irving Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "goldcoast",
+    "name": "Gold Coast Libraries",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "lubbock",
+    "name": "Lubbock Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "burlingtonpl",
+    "name": "Burlington Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "anytime",
+    "name": "Washington Anytime Library",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "stls",
+    "name": "Southern Tier Library System",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "centralpalibraries",
+    "name": "Central PA Libraries",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "gmlc",
+    "name": "Green Mountain Library Consortium",
+    "isConsortium": true,
+    "status": "Live"
   }
 ]
