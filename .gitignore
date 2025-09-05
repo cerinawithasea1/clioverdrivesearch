@@ -38,4 +38,4 @@ debug/
 *.temp
 .cache/
 *.swp
-*.swo
+*.swolibraries.api.cache.json

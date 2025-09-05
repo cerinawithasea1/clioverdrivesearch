@@ -4,11 +4,106 @@ const fetch = require("node-fetch");
 const { RateLimiterMemory } = require('rate-limiter-flexible');
 const chalk = require('chalk');
 
+// Cache file for dynamic library list
+const LIB_CACHE = path.join(__dirname, 'libraries.api.cache.json');
+
 // Create a rate limiter - 2 requests per second
 const rateLimiter = new RateLimiterMemory({
     points: 2,
     duration: 1
 });
+
+async function fetchAllLibrariesFromAPI({ refresh = false } = {}) {
+    if (!refresh && fs.existsSync(LIB_CACHE)) {
+        try {
+            const cached = JSON.parse(fs.readFileSync(LIB_CACHE, 'utf8'));
+            console.log(chalk.green(`Using cached library list (${cached.length} libraries)`));
+            return cached;
+        } catch {}
+    }
+
+    console.log(chalk.cyan('Fetching OverDrive libraries from API...'));
+    const allItems = [];
+    let page = 1;
+    const perPage = 200;
+
+    let currentPage = 1;
+    const baseUrl = `https://thunder.api.overdrive.com/v2/libraries`;
+    
+    while (true) {
+        await rateLimiter.consume(1);
+        const url = currentPage === 1 ? baseUrl : `${baseUrl}?page=${currentPage}`;
+        
+        try {
+            const res = await fetch(url, { 
+                headers: { 'User-Agent': 'library-finder/1.0' } 
+            });
+            
+            if (res.status === 429) {
+                const retryAfter = parseInt(res.headers.get('retry-after') || '5', 10);
+                console.log(chalk.yellow(`Rate limited, waiting ${retryAfter} seconds...`));
+                await new Promise(r => setTimeout(r, retryAfter * 1000));
+                continue;
+            }
+            
+            if (!res.ok) {
+                throw new Error(`Library index fetch failed: ${res.status} ${res.statusText}`);
+            }
+            
+            const data = await res.json();
+            const items = Array.isArray(data.items) ? data.items : [];
+            
+            if (items.length === 0) break;
+            
+            allItems.push(...items);
+            console.log(chalk.gray(`Fetched page ${currentPage}: ${items.length} libraries (${allItems.length} total)`));
+            
+            // Check if there's a next page (limit to 3 pages for testing)
+            if (data.links && data.links.next && currentPage < 3) {
+                currentPage = data.links.next.page;
+            } else {
+                break; // No more pages or reached test limit
+            }
+            
+        } catch (error) {
+            console.error(chalk.red(`Error fetching libraries: ${error.message}`));
+            console.error('Full error:', error);
+            break;
+        }
+    }
+
+    // Normalize to slugs your search uses
+    const normalized = allItems
+        .map(item => ({
+            slug: (item.preferredKey || item.id || '').trim(),
+            name: item.name || 'Unknown Library',
+            isConsortium: !!item.isConsortium,
+            status: item.status
+        }))
+        .filter(item => item.slug && item.status === 'Live');
+
+    fs.writeFileSync(LIB_CACHE, JSON.stringify(normalized, null, 2));
+    console.log(chalk.green(`✅ Cached ${normalized.length} active libraries`));
+    return normalized;
+}
+
+function loadLibrarySlugs({ dynamic = true } = {}) {
+    // Try dynamic cache first if requested
+    if (dynamic && fs.existsSync(LIB_CACHE)) {
+        try {
+            const list = JSON.parse(fs.readFileSync(LIB_CACHE, 'utf8'));
+            return list.map(l => l.slug);
+        } catch {}
+    }
+    
+    // Fallback to static libraries.json (existing behavior)
+    try {
+        const librariesData = JSON.parse(fs.readFileSync('./libraries.json', 'utf8'));
+        return Object.values(librariesData).map(url => url.replace('.overdrive.com', ''));
+    } catch {
+        return [];
+    }
+}
 
 function loadPreferences() {
     try {
@@ -59,22 +154,41 @@ function exportResults(results, format = "json") {
     return filename;
 }
 
-async function searchLibraries(searchTitle, searchAuthor = "") {
+async function searchLibraries(searchTitle, searchAuthor = "", { maxLibs = null, dynamic = true } = {}) {
     const preferences = loadPreferences();
-    const librariesData = JSON.parse(fs.readFileSync("./libraries.json", "utf8"));
     
-    // Sort libraries to search favorites first
-    const libraries = Object.entries(librariesData)
-        .sort(([nameA], [nameB]) => {
-            const aIsFavorite = preferences.favoriteLibraries.includes(nameA);
-            const bIsFavorite = preferences.favoriteLibraries.includes(nameB);
-            return bIsFavorite - aIsFavorite;
-        })
-        .map(([, url]) => url.replace(".overdrive.com", ""));
+    // Load libraries dynamically from OverDrive API or fallback to static list
+    let slugs = loadLibrarySlugs({ dynamic });
+    if (slugs.length === 0 && dynamic) {
+        // First run or no cache: fetch and cache dynamically
+        const libs = await fetchAllLibrariesFromAPI({ refresh: false });
+        slugs = libs.map(l => l.slug);
+    }
+    
+    if (slugs.length === 0) {
+        throw new Error('No libraries found. Try running with --refresh-libs or create libraries.json');
+    }
+    
+    console.log(chalk.cyan(`📚 Searching ${slugs.length} libraries...`));
+    
+    // Sort favorites first (support both names and slugs)
+    const favoriteSet = new Set(preferences.favoriteLibraries || []);
+    const libraries = slugs.sort((a, b) => {
+        const aFav = favoriteSet.has(a);
+        const bFav = favoriteSet.has(b);
+        return (bFav ? 1 : 0) - (aFav ? 1 : 0);
+    });
+    
+    // Limit libraries if requested
+    const searchLibraries = maxLibs ? libraries.slice(0, maxLibs) : libraries;
+    
+    if (maxLibs) {
+        console.log(chalk.gray(`➡️  Limited to first ${searchLibraries.length} libraries`));
+    }
     
     const results = [];
     
-    for (const library of libraries) {
+    for (const library of searchLibraries) {
         try {
             // Wait if we've hit the rate limit
             await rateLimiter.consume(1);
@@ -145,27 +259,58 @@ async function searchLibraries(searchTitle, searchAuthor = "") {
 }
 
 if (require.main === module) {
-    const [,, ...args] = process.argv;
-    let format = null;
-    let searchTerms = [];
-    
-    // Parse command line arguments
-    args.forEach((arg, index) => {
-        if (arg === '--export') {
-            format = args[index + 1];
-        } else if (arg !== 'json' && arg !== 'csv') {
-            searchTerms.push(arg);
+    (async () => {
+        const [,, ...args] = process.argv;
+        let format = null;
+        let refreshLibs = false;
+        let maxLibs = null;
+        let searchTerms = [];
+        
+        // Parse command line arguments
+        args.forEach((arg, index) => {
+            if (arg === '--export') {
+                format = args[index + 1];
+            } else if (arg === '--refresh-libs') {
+                refreshLibs = true;
+            } else if (arg === '--max-libs') {
+                maxLibs = parseInt(args[index + 1] || '0', 10) || null;
+            } else if (!['json', 'csv', '--refresh-libs', '--max-libs'].includes(arg) && !arg.match(/^\d+$/)) {
+                searchTerms.push(arg);
+            }
+        });
+        
+        const searchTerm = searchTerms.join(" ");
+        
+        // Handle refresh-libs flag
+        if (refreshLibs) {
+            console.log(chalk.cyan('🔄 Refreshing OverDrive libraries index...'));
+            try {
+                await fetchAllLibrariesFromAPI({ refresh: true });
+                if (!searchTerm) {
+                    console.log(chalk.green('✅ Library cache refreshed!'));
+                    process.exit(0);
+                }
+            } catch (error) {
+                console.error(chalk.red('❌ Error refreshing libraries:'), error.message);
+                process.exit(1);
+            }
         }
-    });
-    
-    const searchTerm = searchTerms.join(" ");
     
     if (!searchTerm) {
+        if (refreshLibs) return; // Already handled above
         console.error("Please provide a search term");
+        console.log("\nUsage:");
+        console.log("  libsearch \"Book Title\"                 # Search all libraries");
+        console.log("  libsearch --refresh-libs              # Refresh library cache");
+        console.log("  libsearch --max-libs 50 \"Book Title\" # Limit to first 50 libraries");
+        console.log("  libsearch \"Book Title\" --export json  # Export results");
         process.exit(1);
     }
     
-    searchLibraries(searchTerm)
+    const searchOptions = {};
+    if (maxLibs) searchOptions.maxLibs = maxLibs;
+    
+    searchLibraries(searchTerm, "", searchOptions)
         .then(groupedResults => {
             if (Object.keys(groupedResults).length === 0) {
                 console.log(chalk.yellow("No results found"));
@@ -214,6 +359,15 @@ if (require.main === module) {
             console.error(chalk.red("Error:"), error);
             process.exit(1);
         });
+    })().catch(error => {
+        console.error(chalk.red("Fatal error:"), error.message);
+        process.exit(1);
+    });
 }
 
-module.exports = { searchLibraries, exportResults };
+module.exports = { 
+    searchLibraries, 
+    exportResults, 
+    fetchAllLibrariesFromAPI, 
+    loadLibrarySlugs 
+};

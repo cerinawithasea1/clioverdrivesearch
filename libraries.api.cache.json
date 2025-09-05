@@ -1,0 +1,110 @@
+[
+  {
+    "slug": "clevnet",
+    "name": "CLEVNET",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "clc",
+    "name": "Digital Downloads Ohio",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "sanjose",
+    "name": "San Jose Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "kcls",
+    "name": "King County Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "ohdbks",
+    "name": "The Ohio Digital Library",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "wplc",
+    "name": "Wisconsin Public Library Consortium",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "youngstown",
+    "name": "The Public Library of Youngstown and Mahoning County",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "stamford",
+    "name": "The Ferguson Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "burlington",
+    "name": "Burlington County Library System",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "evpl",
+    "name": "Evansville Vanderburgh Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "metronet",
+    "name": "Metro Net Library Consortium",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "fairfax",
+    "name": "Fairfax County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "ccpl",
+    "name": "Cuyahoga County Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "denver",
+    "name": "Denver Public Library",
+    "isConsortium": false,
+    "status": "Live"
+  },
+  {
+    "slug": "nsdc",
+    "name": "North Suburban Digital Consortium",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "lasvegas",
+    "name": "Las Vegas-Clark County Library District",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "phoenix",
+    "name": "Greater Phoenix Digital Library",
+    "isConsortium": true,
+    "status": "Live"
+  },
+  {
+    "slug": "msl",
+    "name": "Microsoft Library",
+    "isConsortium": false,
+    "status": "Live"
+  }
+]

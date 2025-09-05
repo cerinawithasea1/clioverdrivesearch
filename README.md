@@ -39,6 +39,8 @@ This tool helps you search for books across multiple libraries using Overdrive's
 
 ## Usage
 
+### Basic Search Commands
+
 Search for any format:
 ```bash
 libsearch "Book Title"
@@ -54,10 +56,30 @@ Search for audiobooks only:
 libsearch-audio "Book Title"
 ```
 
+### New Dynamic Library Features
+
+🆕 **Automatic OverDrive Library Discovery**: No more manual library configuration!
+
+Refresh the OverDrive libraries index:
+```bash
+libsearch --refresh-libs
+```
+
+Search with library limit (great for testing):
+```bash
+libsearch --max-libs 50 "Book Title"
+```
+
+Combine flags:
+```bash
+libsearch --refresh-libs --max-libs 100 "Book Title" --export json
+```
+
 The results will show:
 - Available copies at different libraries
 - Wait times and hold counts for unavailable copies
 - Direct links to check out or place holds
+- 📚 Searches ALL OverDrive libraries automatically!
 
 ## Files Included
 - library-search.js: Main search script
@@ -92,6 +114,23 @@ node library-search.js "Book Title" --export csv
 ```
 
 Results are saved in the `search-results` directory with timestamps.
+
+### Dynamic Library Management
+
+🆕 **NEW**: Automatic OverDrive library discovery!
+
+- **First run**: Automatically fetches and caches ALL OverDrive libraries
+- **Cached searches**: Uses local cache for fast startup
+- **Manual refresh**: `--refresh-libs` updates the library list
+- **Library limiting**: `--max-libs N` searches only first N libraries (useful for testing)
+
+**Cache file**: `libraries.api.cache.json` (automatically created)
+
+**Benefits**:
+- 🚀 No manual library configuration needed
+- 🌍 Access to ALL OverDrive libraries worldwide  
+- ⚡ Fast searches with intelligent caching
+- 🔄 Easy updates when new libraries are added
 
 ## Setup
 1. Create your libraries.json:
