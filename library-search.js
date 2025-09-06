@@ -103,6 +103,41 @@ function loadLibrarySlugs({ dynamic = true } = {}) {
         } catch {}
     }
     
+    // Try the new detailed libraries data first
+    if (fs.existsSync('./libraries_detailed.json')) {
+        try {
+            const detailedData = JSON.parse(fs.readFileSync('./libraries_detailed.json', 'utf8'));
+            return detailedData
+                .map(item => {
+                    // Each item is an object with library slug as key
+                    const slug = Object.keys(item)[0];
+                    const info = item[slug];
+                    return {
+                        slug: slug,
+                        name: info.name,
+                        status: info.status,
+                        isConsortium: info.isConsortium
+                    };
+                })
+                .filter(lib => lib.status === 'Live')
+                .map(lib => lib.slug);
+        } catch (e) {
+            console.warn(chalk.yellow('Failed to load detailed libraries, falling back to simple list'));
+        }
+    }
+    
+    // Try the simple libraries data
+    if (fs.existsSync('./libraries_simple.json')) {
+        try {
+            const simpleData = JSON.parse(fs.readFileSync('./libraries_simple.json', 'utf8'));
+            return simpleData
+                .filter(lib => lib.status === 'Live')
+                .map(lib => lib.slug);
+        } catch (e) {
+            console.warn(chalk.yellow('Failed to load simple libraries data'));
+        }
+    }
+    
     // Fallback to static libraries.json (existing behavior)
     try {
         const librariesData = JSON.parse(fs.readFileSync('./libraries.json', 'utf8'));
@@ -110,6 +145,62 @@ function loadLibrarySlugs({ dynamic = true } = {}) {
     } catch {
         return [];
     }
+}
+
+function loadDetailedLibraries() {
+    if (fs.existsSync('./libraries_detailed.json')) {
+        try {
+            const detailedData = JSON.parse(fs.readFileSync('./libraries_detailed.json', 'utf8'));
+            const libraryMap = new Map();
+            
+            detailedData.forEach(item => {
+                const slug = Object.keys(item)[0];
+                const info = item[slug];
+                libraryMap.set(slug, {
+                    slug: slug,
+                    name: info.name,
+                    status: info.status,
+                    isConsortium: info.isConsortium,
+                    websiteId: info.websiteId,
+                    links: info.links || {},
+                    features: {
+                        instantAccess: info.isInstantAccessEnabled,
+                        luckyDay: info.isLuckyDayEnabled,
+                        deepSearch: info.allowDeepSearch,
+                        anonymousSampling: info.allowAnonymousSampling
+                    }
+                });
+            });
+            
+            return libraryMap;
+        } catch (e) {
+            console.warn(chalk.yellow('Failed to load detailed library info:', e.message));
+        }
+    }
+    
+    // Fallback to simple data
+    if (fs.existsSync('./libraries_simple.json')) {
+        try {
+            const simpleData = JSON.parse(fs.readFileSync('./libraries_simple.json', 'utf8'));
+            const libraryMap = new Map();
+            
+            simpleData.forEach(lib => {
+                libraryMap.set(lib.slug, {
+                    slug: lib.slug,
+                    name: lib.name,
+                    status: lib.status,
+                    isConsortium: lib.isConsortium,
+                    features: {}
+                });
+            });
+            
+            return libraryMap;
+        } catch (e) {
+            console.warn(chalk.yellow('Failed to load simple library info:', e.message));
+        }
+    }
+    
+    return new Map();
 }
 
 function loadPreferences() {
@@ -159,6 +250,82 @@ function exportResults(results, format = "json") {
         fs.writeFileSync(filename, csvRows.map(row => row.join(',')).join('\n'));
     }
     return filename;
+}
+
+function showLibraryStats() {
+    console.log(chalk.cyan('📊 Library Statistics'));
+    console.log(chalk.cyan('='.repeat(50)));
+    
+    const detailedLibs = loadDetailedLibraries();
+    if (detailedLibs.size === 0) {
+        console.log(chalk.red('No library data found'));
+        return;
+    }
+    
+    let consortiums = 0;
+    let individual = 0;
+    let instantAccess = 0;
+    let luckyDay = 0;
+    let deepSearch = 0;
+    
+    detailedLibs.forEach(lib => {
+        if (lib.isConsortium) consortiums++; else individual++;
+        if (lib.features.instantAccess) instantAccess++;
+        if (lib.features.luckyDay) luckyDay++;
+        if (lib.features.deepSearch) deepSearch++;
+    });
+    
+    console.log(chalk.green(`📚 Total Libraries: ${detailedLibs.size}`));
+    console.log(chalk.blue(`🏛️  Consortiums: ${consortiums}`));
+    console.log(chalk.blue(`🏗️  Individual Libraries: ${individual}`));
+    console.log(chalk.yellow(`⚡ Instant Access Enabled: ${instantAccess}`));
+    console.log(chalk.yellow(`🍀 Lucky Day Enabled: ${luckyDay}`));
+    console.log(chalk.yellow(`🔍 Deep Search Enabled: ${deepSearch}`));
+    console.log();
+}
+
+function findLibraryInfo(searchTerm) {
+    console.log(chalk.cyan(`🔍 Searching for libraries matching: "${searchTerm}"`));
+    console.log(chalk.cyan('='.repeat(50)));
+    
+    const detailedLibs = loadDetailedLibraries();
+    if (detailedLibs.size === 0) {
+        console.log(chalk.red('No library data found'));
+        return;
+    }
+    
+    const matches = [];
+    const searchLower = searchTerm.toLowerCase();
+    
+    detailedLibs.forEach(lib => {
+        if (lib.name.toLowerCase().includes(searchLower) || 
+            lib.slug.toLowerCase().includes(searchLower)) {
+            matches.push(lib);
+        }
+    });
+    
+    if (matches.length === 0) {
+        console.log(chalk.red('No matching libraries found'));
+        return;
+    }
+    
+    matches.forEach(lib => {
+        console.log(chalk.green(`📚 ${lib.name}`));
+        console.log(chalk.gray(`   Slug: ${lib.slug}`));
+        console.log(chalk.gray(`   Type: ${lib.isConsortium ? 'Consortium' : 'Individual Library'}`));
+        
+        if (lib.features.instantAccess) console.log(chalk.yellow('   ⚡ Instant Access'));
+        if (lib.features.luckyDay) console.log(chalk.yellow('   🍀 Lucky Day'));
+        if (lib.features.deepSearch) console.log(chalk.yellow('   🔍 Deep Search'));
+        
+        if (lib.links.libraryHome) {
+            console.log(chalk.blue(`   🌐 Website: ${lib.links.libraryHome.href}`));
+        }
+        if (lib.links.cardAcquisitionUrl) {
+            console.log(chalk.blue(`   📇 Get Card: ${lib.links.cardAcquisitionUrl.href}`));
+        }
+        console.log();
+    });
 }
 
 async function searchLibraries(searchTitle, searchAuthor = "", { maxLibs = null, dynamic = true } = {}) {
@@ -275,6 +442,9 @@ if (require.main === module) {
         let searchTerms = [];
         
         // Parse command line arguments
+        let showStats = false;
+        let libraryInfo = null;
+        
         args.forEach((arg, index) => {
             if (arg === '--export') {
                 format = args[index + 1];
@@ -282,12 +452,27 @@ if (require.main === module) {
                 refreshLibs = true;
             } else if (arg === '--max-libs') {
                 maxLibs = parseInt(args[index + 1] || '0', 10) || null;
-            } else if (!['json', 'csv', '--refresh-libs', '--max-libs'].includes(arg) && !arg.match(/^\d+$/)) {
+            } else if (arg === '--stats') {
+                showStats = true;
+            } else if (arg === '--library-info') {
+                libraryInfo = args[index + 1];
+            } else if (!['json', 'csv', '--refresh-libs', '--max-libs', '--stats', '--library-info'].includes(arg) && !arg.match(/^\d+$/)) {
                 searchTerms.push(arg);
             }
         });
         
         const searchTerm = searchTerms.join(" ");
+        
+        // Handle new commands first
+        if (showStats) {
+            showLibraryStats();
+            if (!searchTerm) process.exit(0);
+        }
+        
+        if (libraryInfo) {
+            findLibraryInfo(libraryInfo);
+            if (!searchTerm) process.exit(0);
+        }
         
         // Handle refresh-libs flag
         if (refreshLibs) {
@@ -305,14 +490,17 @@ if (require.main === module) {
             }
         }
     
-    if (!searchTerm) {
+    if (!searchTerm && !showStats && !libraryInfo) {
         if (refreshLibs) return; // Already handled above
-        console.error("Please provide a search term");
+        console.error("Please provide a search term or use a command");
         console.log("\nUsage:");
-        console.log("  libsearch \"Book Title\"                 # Search all libraries");
-        console.log("  libsearch --refresh-libs              # Refresh library cache");
-        console.log("  libsearch --max-libs 50 \"Book Title\" # Limit to first 50 libraries");
-        console.log("  libsearch \"Book Title\" --export json  # Export results");
+        console.log("  libsearch \"Book Title\"                    # Search all libraries");
+        console.log("  libsearch --refresh-libs                 # Refresh library cache");
+        console.log("  libsearch --max-libs 50 \"Book Title\"    # Limit to first 50 libraries");
+        console.log("  libsearch \"Book Title\" --export json     # Export results");
+        console.log("\nNew Commands:");
+        console.log("  libsearch --stats                        # Show library statistics");
+        console.log("  libsearch --library-info \"Seattle\"       # Find library info by name/slug");
         process.exit(1);
     }
     

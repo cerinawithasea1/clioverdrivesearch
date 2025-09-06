@@ -2,6 +2,25 @@
 
 A supercharged command-line tool to search multiple libraries simultaneously for books and audiobooks using OverDrive's system. Get real-time availability, waitlist times, and direct links across thousands of libraries worldwide!
 
+## 🎉 NEW ENHANCED FEATURES (September 2025)
+
+### 📊 **Comprehensive Library Database**
+- 🌍 **1,179 Live Libraries** from comprehensive OverDrive dataset
+- 🏛️ **221 Consortiums** + **958 Individual Libraries** 
+- 🔍 **Rich Metadata** including features, links, and capabilities
+
+### 📈 **Library Discovery Commands**
+```bash
+libsearch --stats                    # View library statistics dashboard
+libsearch --library-info "Seattle"   # Find detailed library information
+```
+
+### ⚡ **Enhanced Library Features Detection**
+- **Instant Access**: 53 libraries support immediate borrowing
+- **Lucky Day**: 333 libraries offer lucky day collections  
+- **Deep Search**: 1,034 libraries support advanced search
+- **Direct Links**: Website URLs and card acquisition links
+
 ## ✨ SUPERCHARGED Features
 
 🆕 **NEW: Dynamic Library Discovery** - No more manual configuration!
@@ -106,11 +125,31 @@ The results will show:
 - 📚 Searches ALL OverDrive libraries automatically!
 
 ## Files Included
-- library-search.js: Main search script
-- libraries.template.json: Template for library configuration  
-- preferences.json: User preferences and favorite libraries
-- README.md: This instruction file
-- package.json: Node.js dependencies
+- **library-search.js**: Enhanced main search script with new features
+- **libraries_detailed.json**: Comprehensive OverDrive library database (1,179 libraries)
+- **libraries_simple.json**: Simplified library list for fallback
+- **libraries.api.cache.json**: Dynamic API cache for live library discovery
+- **libraries.template.json**: Template for library configuration  
+- **preferences.json**: User preferences and favorite libraries
+- **README.md**: This instruction file
+- **package.json**: Node.js dependencies
+
+### 📁 **Library Data Files**
+
+The tool now supports multiple data sources with intelligent fallback:
+
+1. **libraries_detailed.json** (Primary): Complete metadata from OverDrive API
+   - Full library information including features and links
+   - Consortium vs individual library classification
+   - Service capabilities (Instant Access, Lucky Day, etc.)
+
+2. **libraries_simple.json** (Fallback): Basic library information
+   - Essential data for search functionality
+   - Used if detailed data fails to load
+
+3. **libraries.api.cache.json** (Dynamic): Live API cache
+   - Real-time library discovery from OverDrive
+   - Auto-refreshed with `--refresh-libs` flag
 
 ## Features
 
@@ -190,6 +229,14 @@ node library-search.js "Pride and Prejudice" --export json
 
 # Refresh libraries and limit search
 node library-search.js --refresh-libs --max-libs 50 "Atomic Habits"
+
+# NEW: Library discovery commands
+node library-search.js --stats                    # Show library statistics
+node library-search.js --library-info "Seattle"   # Find library details
+node library-search.js --library-info "Ohio"      # Search by partial name
+
+# Combine commands
+node library-search.js --stats --max-libs 10 "Book Title"  # Stats + limited search
 ```
 
 ## Understanding the Output
